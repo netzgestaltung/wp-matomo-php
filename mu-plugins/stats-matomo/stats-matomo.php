@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin name: sandbox adaptions
+ * Plugin name: stats_matomo adaptions
  * Plugin URI: https://www.netzgestaltung.at
  * Author: Thomas Fellinger
  * Author URI: https://www.netzgestaltung.at
@@ -29,18 +29,18 @@ define('STATS_MATOMO_URL', plugin_dir_url(__FILE__));
  * Plugin setup hook
  * ================
  */
-add_action('plugins_loaded', 'sandbox_setup_stats');
+add_action('plugins_loaded', 'stats_matomo_setup_stats');
 
-function sandbox_setup_stats() {
+function stats_matomo_setup_stats() {
     // track pageviews and url params
-    add_action('wp_footer', 'sandbox_matomo_tracker');
+    add_action('wp_footer', 'stats_matomo_matomo_tracker');
 
     // track download actions
-    // add_action('ddownload_save_success_before', 'sandbox_action_tracker');
+    // add_action('ddownload_save_success_before', 'stats_matomo_action_tracker');
 
     // track form submits
     // cf7 hooks: https://github.com/netzgestaltung/contact-form-7-hooks/
-    add_action('wpcf7_submit', 'sandbox_form_submit_tracker', 10, 2);
+    add_action('wpcf7_submit', 'stats_matomo_form_submit_tracker', 10, 2);
 }
 
 /**
@@ -55,7 +55,7 @@ function sandbox_setup_stats() {
  * Installation:
  * Download: https://github.com/matomo-org/matomo-php-tracker
  * save MatomoTracker.php in yourThemes <folderRoot>/includes/matomo-php-tracker/MatomoTracker.php
- * Integrate this file into yourThemes functions.php and rename "sandbox" to your themes name
+ * Integrate this file into yourThemes functions.php and rename "stats_matomo" to your themes name
  *
  * Configuration:
  * Specify $tracker_url, $matomo_site_id and $matomo_user_token
@@ -63,7 +63,7 @@ function sandbox_setup_stats() {
  *
  * License: GNU General Public License v2.0
  */
-function sandbox_get_matomo_tracker(){
+function stats_matomo_get_matomo_tracker(){
   include_once(STATS_MATOMO_PATH . '/config.php');
   include_once(STATS_MATOMO_PATH . '/MatomoTracker.php');
 
@@ -84,8 +84,8 @@ function sandbox_get_matomo_tracker(){
   return $matomoTracker;
 }
 
-function sandbox_action_tracker($download_id){
-  $matomoTracker = sandbox_get_matomo_tracker();
+function stats_matomo_action_tracker($download_id){
+  $matomoTracker = stats_matomo_get_matomo_tracker();
   // requires plugin "alpha-downloads"
   $download_url = get_post_meta($download_id, '_alpha_file_url', true);
   $matomoTracker->doTrackAction($download_url, 'download');
@@ -93,8 +93,8 @@ function sandbox_action_tracker($download_id){
 
 // track form submits
 // cf7 hooks: https://github.com/netzgestaltung/contact-form-7-hooks/
-function sandbox_form_submit_tracker($cf7, $result){
-  $matomoTracker = sandbox_get_matomo_tracker();
+function stats_matomo_form_submit_tracker($cf7, $result){
+  $matomoTracker = stats_matomo_get_matomo_tracker();
 
   // a form has been viewed
   $matomoTracker->doTrackContentImpression('form-' . $cf7->name(), 'Status: ' . $result['status'] . ', Message: ' . $result['message']);
@@ -111,7 +111,7 @@ function sandbox_form_submit_tracker($cf7, $result){
   $matomoTracker->doTrackContentInteraction('Form submit', 'form-' . $cf7->name(), 'Status: ' . $result['status'] . ', Message: ' . $result['message']);
 }
 
-function sandbox_matomo_tracker(){
+function stats_matomo_matomo_tracker(){
   // exclude json calls
   if ( isset($_POST['json']) || isset($_GET['json']) ) {
     return;
@@ -135,7 +135,7 @@ function sandbox_matomo_tracker(){
   // - bot user agents by regex
   if ( !$is_referer && !is_admin() && is_main_query() && !wp_doing_ajax() && !preg_match('/bot|crawl|slurp|spider/i', $_SERVER['HTTP_USER_AGENT']) ) {
 
-    $matomoTracker = sandbox_get_matomo_tracker();
+    $matomoTracker = stats_matomo_get_matomo_tracker();
     // page title
     $page_title = wp_get_document_title();
 
