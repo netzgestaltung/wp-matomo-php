@@ -10,6 +10,8 @@ Disables:
 Enables:
 * No JS needed but XHR Events tracking is still possible
 * Full programatic control to send WordPress Hooks `add_action`, `add_filter` as Events to Matomo.
+* Form tracking integration with `Contact Form 7` WordPress Plugin
+* Downloads tracking integration for `Alpha Downloads` WordPress Plugin
 * Allows to track WordPress from inside out
 * Anonymous Ajax (XHR) tracking (Heatmaps etc.) with WordPress `wp_ajax_nopriv` methods possible
 
