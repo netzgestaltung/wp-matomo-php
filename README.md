@@ -10,7 +10,7 @@ Disables:
 Enables:
 * No JS needed but XHR Events tracking is still possible
 * Full programatic control to send WordPress Hooks `add_action`, `add_filter` as Events to Matomo.
-* Campain tracking with URL Parameter `?c=<pk_campaign>-<pk_source>-<pk_medium>-<pk_kwd>-<pk_content>` 
+* Campain tracking with URL Parameter `?c=<pk_campaign>(-<pk_source>)(-<pk_medum>)(-<pk_keyword>)(-<pk_content>)` 
 * Banner tracking with URL Parameter (ToDo: description)
 * Form tracking integration with `Contact Form 7` WordPress Plugin
 * Downloads tracking integration for `Alpha Downloads` WordPress Plugin
