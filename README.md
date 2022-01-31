@@ -3,8 +3,8 @@ Connecting WordPress to Matomo with the PHP API - Tracking WordPress App Behavio
 
 Disables:
 * IP delivering to Matomo
-* Cookies set by Matomo
 * Country detection inside Matomo
+* Cookies set by Matomo
 * Recurring Users detection
 
 Enables:
