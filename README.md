@@ -17,6 +17,6 @@ Enables:
 
 Currently this is a "must use plugin".
 
-Create a folder `mu-plugins` inside of `<wp_root_directory>/wp-content/` if it does not exist and upload the content of the `mu-plugins` folder you haver downloaded here.
+Create a folder `mu-plugins` inside of `<wp_root_directory>/wp-content/` if it does not exist and upload the content of the `mu-plugins` folder you have downloaded here.
 
 Edit the `config.php` regarding your matomo server.
